@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
     {
         Model::unguard();
 
-        \DB::beginTransaction();
+        // \DB::beginTransaction();
 
         \DB::table('users')->delete();
         \DB::table('sales_members')->delete();
@@ -78,6 +78,6 @@ class UsersTableSeeder extends Seeder
             $allUser->save();
         }
 
-        \DB::commit();
+        // \DB::commit();
     }
 }

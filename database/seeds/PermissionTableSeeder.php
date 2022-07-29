@@ -16,7 +16,7 @@ class PermissionTableSeeder extends Seeder
     public function run() {
         Model::unguard();
 
-        \DB::beginTransaction();
+        // \DB::beginTransaction();
 
         \DB::table('permissions')->delete();
 
@@ -213,7 +213,7 @@ class PermissionTableSeeder extends Seeder
             }
         }
 
-        \DB::commit();
+        // \DB::commit();
 
     }
 

@@ -14,7 +14,7 @@ class EmailTemplateTableSeeder extends Seeder
     {
         Model::unguard();
 
-        \DB::beginTransaction();
+        // \DB::beginTransaction();
 
         \DB::table('email_templates')->delete();
 
@@ -31,6 +31,6 @@ FOD;
         $emailTemplate->created_by = \App\Models\User::first()->id;
         $emailTemplate->save();
 
-        \DB::commit();
+        // \DB::commit();
     }
 }

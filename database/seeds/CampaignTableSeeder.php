@@ -17,7 +17,7 @@ class CampaignTableSeeder extends Seeder
     {
         Model::unguard();
 
-        DB::beginTransaction();
+        // DB::beginTransaction();
 
         DB::table('campaigns')->delete();
         DB::table('leads')->delete();
@@ -138,7 +138,7 @@ class CampaignTableSeeder extends Seeder
 
             });
 
-        DB::commit();
+        // DB::commit();
     }
 
     public function assignMembers($campaign)

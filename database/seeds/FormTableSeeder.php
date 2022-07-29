@@ -17,7 +17,7 @@ class FormTableSeeder extends Seeder
     {
         Model::unguard();
 
-        DB::beginTransaction();
+        // DB::beginTransaction();
 
         DB::table('forms')->delete();
         DB::table('form_fields')->delete();
@@ -65,6 +65,6 @@ class FormTableSeeder extends Seeder
             }
         }
 
-        DB::commit();
+        // DB::commit();
     }
 }

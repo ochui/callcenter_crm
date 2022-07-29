@@ -18,7 +18,7 @@ class RolesTableSeeder extends Seeder
 
         Model::unguard();
 
-        \DB::beginTransaction();
+        // \DB::beginTransaction();
 
         \DB::table('roles')->delete();
 
@@ -57,7 +57,7 @@ class RolesTableSeeder extends Seeder
             $user->roles()->attach($manager->id); // id only
         }
 
-        \DB::commit();
+        // \DB::commit();
     }
 
 }

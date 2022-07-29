@@ -14,7 +14,7 @@ class SettingsTableSeeder extends Seeder
     {
         Model::unguard();
 
-        \DB::beginTransaction();
+        // \DB::beginTransaction();
 
         \DB::table('settings')->delete();
         \DB::table('email_settings')->delete();
@@ -33,6 +33,6 @@ class SettingsTableSeeder extends Seeder
         $emailSetting = new \App\Models\EmailSetting();
         $emailSetting->save();
 
-        \DB::commit();
+        // \DB::commit();
     }
 }
