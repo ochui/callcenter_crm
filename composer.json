@@ -13,6 +13,7 @@
         "fideloper/proxy": "*",
         "froiden/envato": "*",
         "froiden/laravel-installer": "*",
+        "guzzlehttp/guzzle": "^7.4",
         "laravel/framework": "*",
         "laravel/helpers": "*",
         "laravel/tinker": "*",
