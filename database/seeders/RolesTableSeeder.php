@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use App\Models\Role;
 use App\Models\User;
@@ -34,7 +36,7 @@ class RolesTableSeeder extends Seeder
         $user = User::where('email', '=', 'admin@example.com')->first();
         $user->roles()->attach($admin->id); // id only
 
-        if(!App::environment('envato'))
+        if(!App::environment('dev'))
         {
             $member = new Role();
             $member->name = 'member';

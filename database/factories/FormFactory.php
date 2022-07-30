@@ -1,27 +1,31 @@
 <?php
 
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Form;
 use App\Models\User;
 use Faker\Generator as Faker;
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
-*/
+class FormFactory extends Factory {
+    /**
+    * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Form::class;
 
+    /**
+     * Define the model's default state.
+    *
+    * @return array
+    */
 
-
-$factory->define(Form::class, function (Faker $faker) {
-
-    $randomUser = User::where('email', 'manager@example.com')->first();
-
-    return [
-        'created_by' => $randomUser->id
-    ];
-});
+    public function definition() {
+        return [
+            'created_by' => function () {
+                return User::where( 'email', 'manager@example.com' )->first();
+            }
+        ];
+    }
+}

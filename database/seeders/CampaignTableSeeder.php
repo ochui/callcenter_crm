@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +29,7 @@ class CampaignTableSeeder extends Seeder
         DB::statement('ALTER TABLE leads AUTO_INCREMENT = 1');
         DB::statement('ALTER TABLE lead_data AUTO_INCREMENT = 1');
 
-        factory(Campaign::class, 7)
+        Campaign::factory()->count(7)
             ->create()->each(function ($campaign) {
                 $assignedMembers = $this->assignMembers($campaign);
 
@@ -37,9 +39,9 @@ class CampaignTableSeeder extends Seeder
 
                     if($completedLeads > 0)
                     {
-                        $faker = Faker\Factory::create();
+                        $faker = \Faker\Factory::create();
 
-                        factory(Lead::class, $completedLeads)->create([
+                        Lead::factory()->count($completedLeads)->create([
                             'campaign_id' => $campaign->id,
                             'status' => 'actioned'
                         ])->each(function ($lead) use($campaign, $faker, $assignedMembers) {
@@ -111,9 +113,9 @@ class CampaignTableSeeder extends Seeder
 
                     if($campaign->remaining_leads > 0)
                     {
-                        $faker = Faker\Factory::create();
+                        $faker = \Faker\Factory::create();
 
-                        factory(Lead::class, $campaign->remaining_leads)->create([
+                        Lead::factory()->count($campaign->remaining_leads)->create([
                             'campaign_id' => $campaign->id,
                             'status' => 'unactioned'
                         ])->each(function ($lead) use($campaign, $faker) {
@@ -217,7 +219,7 @@ class CampaignTableSeeder extends Seeder
             $value = $faker->e164PhoneNumber;
         } else if($fieldName == 'Alternative Number')
         {
-            $value = $faker->tollFreePhoneNumber;
+            $value = $faker->tollFreePhoneNumber();
         } else if($fieldName == 'Notes')
         {
             $value = $faker->realText($faker->numberBetween(50,80));

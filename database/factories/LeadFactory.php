@@ -1,37 +1,44 @@
 <?php
 
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Lead;
 use App\Models\Form;
 use App\Models\User;
 use Faker\Generator as Faker;
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
-*/
+class LeadFactory extends Factory {
+    /**
+    * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Lead::class;
 
+    /**
+     * Define the model's default state.
+    *
+    * @return array
+    */
 
+    public function definition() {
+        $interested = $this->faker->randomElement( [ 'interested', 'not_interested', 'unreachable' ] );
 
-$factory->define(Lead::class, function (Faker $faker) {
+        return [
+            'interested' => function ( array $lead ) use( $interested ) {
+                return $lead[ 'status' ] == 'actioned' ? $interested : NULL;
+            }
+            ,
+            'appointment_booked' => function ( array $lead ) use( $interested ) {
+                return $lead[ 'status' ] == 'actioned' ? rand( 0, 1 ) : 0;
+            }
+            ,
+            'time_taken' => function ( array $lead ) {
+                return $lead[ 'status' ] == 'actioned' ? $this->faker->numberBetween( 180, 300 ) : NULL;
+            }
+            ,
 
-    $interested = $faker->randomElement(['interested', 'not_interested', 'unreachable']);
-
-    return [
-        'interested' => function (array $lead) use($interested) {
-            return $lead['status'] == 'actioned' ? $interested : NULL;
-        },
-        'appointment_booked' => function (array $lead) use($interested) {
-            return $lead['status'] == 'actioned' ? rand(0, 1) : 0;
-        },
-        'time_taken' => function (array $lead) use($faker) {
-            return $lead['status'] == 'actioned' ? $faker->numberBetween(180, 300) : NULL;
-        },
-        
-    ];
-});
+        ];
+    }
+}

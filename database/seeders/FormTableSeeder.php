@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -48,14 +50,14 @@ class FormTableSeeder extends Seeder
 
         foreach ($formNames as $formName)
         {
-            $form = factory(Form::class)->create([
+            $form = Form::factory()->create([
                 'form_name' => $formName['name']
             ]);
 
             $orderNo = 1;
             foreach ($formName['fields'] as $formFieldName)
             {
-                $formField = factory(FormField::class)->create([
+                $formField = FormField::factory()->create([
                     'field_name' => $formFieldName,
                     'form_id' => $form->id,
                     'order' => $orderNo

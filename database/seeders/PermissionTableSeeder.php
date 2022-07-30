@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use App\Models\Permission;
 use Illuminate\Database\Eloquent\Model;
@@ -170,7 +172,7 @@ class PermissionTableSeeder extends Seeder
         //endregion
 
 
-        if(!App::environment('envato'))
+        if(!App::environment('dev'))
         {
             // Manager
             $managerPermissions = Permission::whereIn('name', [

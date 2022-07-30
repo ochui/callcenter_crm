@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\App;
 
@@ -12,17 +14,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
          $this->call(UsersTableSeeder::class);
          $this->call(RolesTableSeeder::class);
          $this->call(PermissionTableSeeder::class);
          $this->call(SettingsTableSeeder::class);
 
-        if(!App::environment('envato'))
-        {
+        // if(!App::environment('dev'))
+        // {
             $this->call(FormTableSeeder::class);
             $this->call(CampaignTableSeeder::class);
             $this->call(EmailTemplateTableSeeder::class);
-        }
+        // }
 
     }
 }

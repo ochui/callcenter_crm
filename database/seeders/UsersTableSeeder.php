@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\User;
 use App\Models\SalesMember;
 use Illuminate\Database\Seeder;
@@ -34,7 +36,7 @@ class UsersTableSeeder extends Seeder
 
 
         // Create three User instances...
-        if(!App::environment('envato'))
+        if(!App::environment('dev'))
         {
             User::create([
                 'first_name' => 'Member',
@@ -48,10 +50,10 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('123456')
             ]);
 
-            $users = factory(User::class, 16)->create();
+            $users = \App\Models\User::factory()->count(16)->create();
 
             // Sales Members
-            $salesMember = factory(SalesMember::class, 30)->create();
+            $salesMember = \App\Models\SalesMember::factory()->count(30)->create();
         }
 
         // For adding twilio username
