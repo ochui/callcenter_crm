@@ -30,6 +30,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'first_name' => 'Admin',
+            'last_name' => 'Admin',
             'email' => 'admin@example.com',
             'password' => Hash::make('123456')
         ]);
@@ -40,12 +41,14 @@ class UsersTableSeeder extends Seeder
         {
             User::create([
                 'first_name' => 'Member',
+                'last_name' => 'Demo',
                 'email' => 'member@example.com',
                 'password' => Hash::make('123456')
             ]);
 
             User::create([
                 'first_name' => 'Manager',
+                'last_name' => 'Demo',
                 'email' => 'manager@example.com',
                 'password' => Hash::make('123456')
             ]);
@@ -69,14 +72,14 @@ class UsersTableSeeder extends Seeder
 
             $name = str_replace(' ', '_', $name);
 
-            $checkIfNameAlreadyExists = \App\Models\User::where('twilio_client_name', $name)->count();
+            $checkIfNameAlreadyExists = \App\Models\User::where('client_name', $name)->count();
 
             if($checkIfNameAlreadyExists > 0)
             {
                 $name = $name.'_'.$allUser->id;
             }
 
-            $allUser->twilio_client_name = $name;
+            $allUser->client_name = $name;
             $allUser->save();
         }
 

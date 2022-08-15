@@ -140,12 +140,12 @@ class UserController extends AdminBaseController
             $name .= ' '. trim(strtolower($user->last_name));
         }
         $name = str_replace(' ', '_', $name);
-        $checkIfNameAlreadyExists = \App\Models\User::where('twilio_client_name', $name)->count();
+        $checkIfNameAlreadyExists = \App\Models\User::where('client_name', $name)->count();
         if($checkIfNameAlreadyExists > 0)
         {
             $name = $name.'_'.$user->id;
         }
-        $user->twilio_client_name = $name;
+        $user->client_name = $name;
         $user->save();
 
         \DB::commit();

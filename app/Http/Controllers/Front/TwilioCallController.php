@@ -35,7 +35,7 @@ class TwilioCallController extends Controller
         {
             $user = auth()->guard('admin')->user();
 
-            $supportAgent = $user->twilio_client_name;
+            $supportAgent = $user->client_name;
         }
 
 //        if ($forPage === route('dashboard', [], false)) {
@@ -108,7 +108,7 @@ class TwilioCallController extends Controller
         $users = User::orderBy('updated_at', 'desc')->take(10)->get();
         foreach ($users as $user)
         {
-            $dial->client($user->twilio_client_name);
+            $dial->client($user->client_name);
         }
 
         return $response;

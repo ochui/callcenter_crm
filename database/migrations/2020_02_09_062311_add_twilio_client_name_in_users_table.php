@@ -14,7 +14,7 @@ class AddTwilioClientNameInUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('twilio_client_name')->nullable()->default(null)->after('last_name');
+            $table->string('client_name')->nullable()->default(null)->after('last_name');
         });
 
         $allUsers = \App\Models\User::select('id', 'first_name', 'last_name')->get();
@@ -30,14 +30,14 @@ class AddTwilioClientNameInUsersTable extends Migration
 
             $name = str_replace(' ', '_', $name);
 
-            $checkIfNameAlreadyExists = \App\Models\User::where('twilio_client_name', $name)->count();
+            $checkIfNameAlreadyExists = \App\Models\User::where('client_name', $name)->count();
 
             if($checkIfNameAlreadyExists > 0)
             {
                 $name = $name.'_'.$allUser->id;
             }
 
-            $allUser->twilio_client_name = $name;
+            $allUser->client_name = $name;
             $allUser->save();
         }
     }
@@ -50,7 +50,7 @@ class AddTwilioClientNameInUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['twilio_client_name']);
+            $table->dropColumn(['client_name']);
         });
     }
 }
